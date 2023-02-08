@@ -1,0 +1,37 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    Кабинет пользователя
+{% endblock%}
+
+{% block content %}
+    <h1>Кабинет пользователя</h1>
+    <div class="d-flex text-muted pt-3">
+      <img class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="64" height="64"
+           src="{{ user.profile.img.url }}">
+      <p class="pb-3 mb-0 small lh-sm border-bottom">
+        <strong class="d-block text-gray-dark">@{{ user.username }}</strong>
+        {% if user.email %}
+          <b>Email:</b> {{ user.email }}
+        {% endif %}
+      </p>
+    </div>
+    <form method="post" enctype="multipart/form-data" class="form-register mt-4">
+        {% csrf_token %}
+        {{ updateUserFrom.as_p }}
+        {{ profileForm.as_p }}
+        <button class="btn btn-outline-warning" type="submit">
+            Обновить
+        </button>
+    </form>
+{% endblock %}
+
+{% block aside %}
+    <h4 class="mt-2">Интересные статьи</h4>
+    <img src="https://avatars.mds.yandex.net/i?id=df8e3b4356c56fe9e38c4b02fc2792d9-3797439-images-thumbs&n=13&exp=1"
+         class="img-thumbnail">
+    <p>Бла-Бла-Бла</p>
+    <a href="https://www.linkedin.com/feed/" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    </a>
+{% endblock %}

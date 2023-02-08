@@ -1,0 +1,71 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Все статьи от автора {{ view.kwargs.username }}</h2>   <!--автора берем из url-->
+    <h4>Количество статей: {{ page_obj.paginator.count }}</h4>
+    {% for post in news %}
+        <div class="alert alert-light">
+            <h1>{{ post.title }}</h1>
+            <div class="container">
+                <p >{{ post.text|striptags|truncatewords:50 }}</p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="{{ post.avtor.profile.img.url }}" alt="{{ post.avtor }}" class="user_img">
+                    </div>
+                    <div class="col-md-5">
+                        <span class="text-muted">Публикация: {{post.date|date:"d E Y в H:i"}}</span>
+                        {% if post.avtor %}
+                            <p><b>Автор:</b> <a href="{% url 'user-news' post.avtor%}">
+                                {{ post.avtor }}</a></p>
+                        {% else %}
+                            <p><b>Автор:</b><mark>Аноним</mark></p>
+                        {% endif %}
+                    </div>
+                        <a href="{% url 'news-detail' post.id %}"
+                           class="btn btn-outline-warning mt-2">
+                            Читать далее
+                        </a>
+                </div>
+            </div>
+
+        </div>
+    {% endfor %}
+
+    {% if is_paginated %}
+        {% if page_obj.has_previous  %}
+            <a href="{% url 'home' %}" class="btn btn-outline-secondary">Начало</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-secondary">Предыдущая</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+                <button class="btn btn-secondary"> {{ num }}</button>
+            {%  elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'  %}
+                <a href="?page={{ num }}" class="btn btn-outline-secondary">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next  %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-secondary">
+                Следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-secondary">
+                Последняя</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block aside %}
+    <h4 class="mt-2">Интересные статьи</h4>
+    <img src="https://media.licdn.com/media/AAYQAgSuAAgAAQAAAAAAABlvNp5yzndgSdCsu3q6Pw22qA.png"
+         class="img-thumbnail">
+    <p>Бла-Бла-Бла</p>
+    <a href="https://www.linkedin.com/feed/" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    </a>
+
+{% endblock %}
