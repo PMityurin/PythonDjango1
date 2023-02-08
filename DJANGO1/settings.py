@@ -123,6 +123,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mityurin96@gmail.com' # почта откого придет восстановительное письмо
 EMAIL_HOST_PASSWORD = 'eqeyweeeekxaezda'
 
+# STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles') при выгрузке на сервер убрать коммент
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
