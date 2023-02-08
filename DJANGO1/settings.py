@@ -120,8 +120,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mityurin96@gmail.com' # почта откого придет восстановительное письмо
-EMAIL_HOST_PASSWORD = 'eqeyweeeekxaezda'
+EMAIL_HOST_USER = 'Help@gmail.com' # почта откого придет восстановительное письмо
+EMAIL_HOST_PASSWORD = 'ххххххх' # пароль от почты
 
 # STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles') при выгрузке на сервер убрать коммент
 STATIC_URL = 'static/'
