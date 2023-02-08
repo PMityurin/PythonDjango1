@@ -1,0 +1,1 @@
+web: gunicorn DJANGO1.wsgi
